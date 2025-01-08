@@ -78,7 +78,7 @@ app.post("/login", (request, response) => {
     .then((user) => {
       bcrypt.compare(request.body.password, user.password)
         .then((passwordCheck) => {
-          if(!passwordCheck) {
+          if (!passwordCheck) {
             return response.status(400).send({
               message: "Credential does not match",
               error,
@@ -118,7 +118,40 @@ app.post("/login", (request, response) => {
 
 // authentication endpoint
 app.get("/api/forms/list", auth, (request, response) => {
-  response.json({ message: "You are authorized to access me" });
+  Forms.find().then((result) => {
+    response.status(200).send({
+      message: "Form List",
+      result,
+    });
+  });
+});
+
+// authentication endpoint
+app.get("/api/forms/view/:formId", auth, (request, response) => {
+  Forms.findById(request.params.formId).then((result) => {
+    response.status(200).send(result);
+  });
+});
+
+// Save form data
+app.post("/api/forms/save", auth, (request, response) => {
+  const form = new Forms({
+    form_name: request.body.form_name,
+    form_data: request.body.form_data,
+  });
+  form.save()
+    .then((result) => {
+      response.status(201).send({
+        message: "Form Saved Successfully",
+        result,
+      });
+    })
+    .catch((error) => {
+      response.status(500).send({
+        message: "Error Saving Form",
+        error,
+      });
+    });
 });
 
 module.exports = app;
