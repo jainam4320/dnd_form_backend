@@ -3,9 +3,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const dbConnect = require("./db/dbconnect");
-const User = require("./db/userModel");
-const auth = require("./auth");
+const dbConnect = require("./common/dbConnect");
+const User = require("./model/user");
+const auth = require("./module/auth");
 
 dbConnect();
 
