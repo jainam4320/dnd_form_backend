@@ -6,8 +6,8 @@ async function dbConnect() {
         .connect(
             process.env.DB_URL,
             {
-                useNewUrlParser: true, 
-                useUnifiedTopology: true 
+                useNewUrlParser: true,
+                useUnifiedTopology: true
             }
         )
         .then(() => {

@@ -8,12 +8,13 @@ const FormsSchema = new mongoose.Schema({
     },
 
     form_data: {
-        type:  JSON,
+        type: JSON,
         required: [true, "Please provide some components in forms!"],
         unique: false,
-    }},
+    }
+},
 
-    {timestamps: true},
+    { timestamps: true },
 
 )
 
