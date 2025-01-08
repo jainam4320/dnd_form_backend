@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dbConnect = require("./common/dbConnect");
 const User = require("./model/user");
+const Forms = require("./model/forms");
 const auth = require("./module/auth");
 
 dbConnect();
@@ -116,7 +117,7 @@ app.post("/login", (request, response) => {
 });
 
 // authentication endpoint
-app.get("/auth-endpoint", auth, (request, response) => {
+app.get("/api/forms/list", auth, (request, response) => {
   response.json({ message: "You are authorized to access me" });
 });
 
